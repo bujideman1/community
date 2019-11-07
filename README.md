@@ -2,4 +2,4 @@
 ## 资料
 https://spring.io/guides
 ## 工具
-idea
+https://git-scm/download
