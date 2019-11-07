@@ -10,6 +10,8 @@ import xyz.kurumi.community.community.dto.AccessTokenDTO;
 import xyz.kurumi.community.community.dto.GithubUser;
 import xyz.kurumi.community.community.provider.GithubProvider;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class AuthorizeController {
     @Autowired
@@ -22,7 +24,8 @@ public class AuthorizeController {
     private String redirectUri;
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code") String code,
-                           @RequestParam(name = "state") String state) {
+                           @RequestParam(name = "state") String state,
+                            HttpServletRequest request) {
 
         AccessTokenDTO accessTokenDTO= new AccessTokenDTO();
         accessTokenDTO.setCode(code);
@@ -32,7 +35,14 @@ public class AuthorizeController {
         accessTokenDTO.setClient_secret(clientSecret);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser user = githubProvider.getUser(accessToken);
-        System.out.println(user.getName());
-        return "index";
+        if(user!=null){
+            request.getSession().setAttribute("user",user);
+            return "redirect:/";
+            //登陆成功
+        }
+        else{
+            return "redirect:/";
+            //登录失败
+        }
     }
 }
