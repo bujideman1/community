@@ -10,7 +10,6 @@ import xyz.kurumi.community.community.dto.GithubUser;
 import xyz.kurumi.community.community.mapper.UserMapper;
 import xyz.kurumi.community.community.model.User;
 import xyz.kurumi.community.community.provider.GithubProvider;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -50,6 +49,7 @@ public class AuthorizeController {
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            user.setAvatarUrl(githubUser.getAvatar_url());
             userMapper.insert(user);
             response.addCookie(new Cookie("token",token));
             request.getSession().setAttribute("user",githubUser);

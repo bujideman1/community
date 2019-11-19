@@ -13,6 +13,7 @@ import xyz.kurumi.community.community.model.User;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.text.CollationKey;
 
 @Controller
 public class PublishController {
@@ -41,6 +42,7 @@ public class PublishController {
         model.addAttribute("tag",tag);
         User user = null;
         Cookie[] cookies = request.getCookies();
+        if(cookies!=null&&cookies.length!=0){
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("token")) {
                 String token=cookie.getValue();
@@ -50,7 +52,7 @@ public class PublishController {
                 }
                 break;
             }
-        }
+        }}
         if(user==null){
             model.addAttribute("error","用户未登陆");
             return "publish";

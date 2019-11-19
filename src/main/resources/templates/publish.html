@@ -20,7 +20,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">码农社区</a>
+            <a class="navbar-brand" href="/">码农社区</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -67,7 +67,7 @@
                 </div>
                 <div class="form-group">
                     <label for="description">问题补充</label>
-                    <textarea name="description" th:value="description" class="form-control" id="description" cols="30" rows="10"></textarea>
+                    <textarea name="description" th:text="${description}" class="form-control" id="description" cols="30" rows="10"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="tag">添加标签</label>
