@@ -17,9 +17,8 @@ public class PaginationDTO {
     private boolean showEndPage;//是否展示末页
     private Integer Page;//当前页码
     private Set<Integer> pages = new TreeSet<>();//现实的页码集合
-
+    private Integer totalPage;
     public void setPagination(Integer totalCount, Integer page, Integer size) {
-        Integer totalPage;
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
         } else {
@@ -28,18 +27,21 @@ public class PaginationDTO {
         if (page > totalPage) {
             page = totalPage;
         }
+        this.Page = page;
         pages.add(page);
+        //是否展示前面三页按钮
         for (int i = 0; i < 3; i++) {
             if (page - i > 0) {
                 pages.add(page - i);
             }
         }
+        //展示后面三页按钮
         for (int i = 0; i < 3; i++) {
             if (page + i <= totalPage) {
                 pages.add(page + i);
             }
         }
-        this.Page = page;
+
         //是否展示上一页，如果当前页是第一页，没有上一页
         if (page == 1) {
             showPrevious = false;
