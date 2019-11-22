@@ -18,15 +18,7 @@ public class PaginationDTO {
     private Integer Page;//当前页码
     private Set<Integer> pages = new TreeSet<>();//现实的页码集合
     private Integer totalPage;
-    public void setPagination(Integer totalCount, Integer page, Integer size) {
-        if (totalCount % size == 0) {
-            totalPage = totalCount / size;
-        } else {
-            totalPage = totalCount / size + 1;
-        }
-        if (page > totalPage) {
-            page = totalPage;
-        }
+    public void setPagination(Integer totalPage, Integer page) {
         this.Page = page;
         pages.add(page);
         //是否展示前面三页按钮
